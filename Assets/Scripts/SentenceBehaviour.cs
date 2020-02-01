@@ -17,7 +17,7 @@ public class SentenceBehaviour : MonoBehaviour
     public Player player;
     private int level = 0;
     private int cycles = 0;
-    private List<int> sentencesUsed = new List<int>();
+    private List<string> sentencesUsed = new List<string>();
 
     //public StreamReader reader = new StreamReader(path);
 
@@ -38,14 +38,16 @@ public class SentenceBehaviour : MonoBehaviour
 		// print("test");
     }
 
-    void getNewSentence(int round){
+    public void getNewSentence(int round){
         Sentence = lines[Random.Range(0, lines.Length)];
         splitSentence(Sentence);
 
         // Check if Sentence equals
-        if(keywords.Length != round){
+        if(keywords.Length != round && sentencesUsed.Contains(Sentence)){
             getNewSentence(round);
         }
+
+        sentencesUsed.Add(Sentence);
 
         keywordsShuffled.Clear();
 

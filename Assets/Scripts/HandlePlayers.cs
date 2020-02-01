@@ -7,11 +7,12 @@ public class HandlePlayers : MonoBehaviour
     // Start is called before the first frame update
     public int currentPlayerId = 0;
     public GameObject currentPlayer;
+    private int numPlayers = 0;
 
     void Start()
     {
         // Create A Class for Each Player
-        int numPlayers =  PlayerPrefs.GetInt("NumberOfPlayers", 0);
+        numPlayers = PlayerPrefs.GetInt("NumberOfPlayers", 0);
         print(numPlayers);
         for(var i=0; i < numPlayers; i++){
             GameObject player;
@@ -22,6 +23,16 @@ public class HandlePlayers : MonoBehaviour
         currentPlayer = GameObject.Find("Player"  + currentPlayerId.ToString());
 
     }
+
+    public void switchPlayer(){
+        if(currentPlayerId > numPlayers){
+            currentPlayerId = 0;
+        } else{
+            currentPlayerId++;
+        }
+        currentPlayer = GameObject.Find("Player"  + currentPlayerId.ToString());
+    }
+
 
     // Update is called once per frame
     void Update()

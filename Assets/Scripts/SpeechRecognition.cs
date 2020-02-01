@@ -11,6 +11,7 @@ public class SpeechRecognition : MonoBehaviour
     protected string word;
     private string previousWord;
     private int counter=0;
+    private int correctTracker = 0;
 
 
     private void Start()
@@ -21,11 +22,26 @@ public class SpeechRecognition : MonoBehaviour
     private void Recognizer_OnPhraseRecognized(PhraseRecognizedEventArgs args)
     {
         word = args.text;
-		print(word);
-		if (!string.IsNullOrEmpty(word) && word != previousWord){
-			print(sb.validateWord(word, counter));
-			previousWord = word;
+        if(!string.IsNullOrEmpty(word) && word != previousWord){
+            bool answer = sb.validateWord(word, counter);
+            previousWord = word;
             counter++;
+            if(answer){
+                correctTracker++;
+            }
+        }
+        if(counter == keywords.Length){
+            // Set the Player Score
+            GetComponent<Player>().updatePlayerData(correctTracker, keywords.Length - correctTracker);
+            
+            correctTracker = 0;
+
+            // Generate New Sentence
+            GetComponent<SentenceBehaviour>().getNewSentence(2);
+
+            // Switch to the next player
+            GetComponent<HandlePlayers>().switchPlayer();
+
         }
     }
 
@@ -36,10 +52,12 @@ public class SpeechRecognition : MonoBehaviour
             recognizer.OnPhraseRecognized -= Recognizer_OnPhraseRecognized;
             recognizer.Stop();
         }
+
     }
 
 	private void Update()
 	{
+
 	}
 	
 	public void loadKeywords()

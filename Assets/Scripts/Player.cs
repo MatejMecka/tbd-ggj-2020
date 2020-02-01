@@ -25,4 +25,9 @@ public class Player : MonoBehaviour
         }
 
     }
+
+    public void updatePlayerData(int correctTracker, int wrongAnswers){
+        corrects += correctTracker;
+        wrongs += wrongAnswers;
+    }
 }
