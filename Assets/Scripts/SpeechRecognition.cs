@@ -1,5 +1,6 @@
 ﻿using UnityEngine.Windows.Speech;
 using UnityEngine;
+
 public class SpeechRecognition : MonoBehaviour
 {
 	private SentenceBehaviour sb;
@@ -11,16 +12,8 @@ public class SpeechRecognition : MonoBehaviour
 
     private void Start()
     {
-		sb = gameObject.GetComponent<SentenceBehaviour>();
-		keywords = sb.keywords;
-
-        if (keywords != null)
-        {
-            recognizer = new KeywordRecognizer(keywords, confidence);
-            recognizer.OnPhraseRecognized += Recognizer_OnPhraseRecognized;
-            recognizer.Start();
-        }
-    }
+		
+	}
 
     private void Recognizer_OnPhraseRecognized(PhraseRecognizedEventArgs args)
     {
@@ -38,6 +31,19 @@ public class SpeechRecognition : MonoBehaviour
 
 	private void Update()
 	{
-		print(word);
+		//print(word);
+	}
+	
+	public void loadKeywords()
+	{
+		sb = gameObject.GetComponent<SentenceBehaviour>();
+		keywords = sb.keywords;
+
+		if (keywords != null)
+		{
+			recognizer = new KeywordRecognizer(keywords, confidence);
+			recognizer.OnPhraseRecognized += Recognizer_OnPhraseRecognized;
+			recognizer.Start();
+		}
 	}
 }

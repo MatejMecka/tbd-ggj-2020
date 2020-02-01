@@ -7,8 +7,9 @@ using UnityEngine.UI;
 
 public class SentenceBehaviour : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public string Sentence = "";
+	// Start is called before the first frame update
+	private SpeechRecognition srec;
+	public string Sentence = "";
     public string[] keywords = new string[] {};
     public List<string> keywordsShuffled = new List<string>();
     public Text sentence;
@@ -28,11 +29,14 @@ public class SentenceBehaviour : MonoBehaviour
 
         lines = fileContents.Split("\n"[0]);
         getNewSentence(level+3);
+
+		srec = gameObject.GetComponent<SpeechRecognition>();
+		srec.loadKeywords();
     }   
 
     // Update is called once per frame
     void Update(){
-       // print("test");
+		// print("test");
     }
 
     void getNewSentence(int round){
@@ -64,7 +68,6 @@ public class SentenceBehaviour : MonoBehaviour
         for(int i=0; i < keywords.Length; i++){
             keywords[i] = null;
         }
-		sentence = Regex.Replace(sentence, @"\s+", "");
         keywords = sentence.Split(' ');
     }
 
@@ -116,6 +119,5 @@ public class SentenceBehaviour : MonoBehaviour
          */
     }
 
-    
 
 }
