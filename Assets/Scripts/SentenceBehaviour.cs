@@ -40,7 +40,7 @@ public class SentenceBehaviour : MonoBehaviour
 
     public void getNewSentence(int round){
         Sentence = lines[Random.Range(0, lines.Length)];
-        splitSentence(Sentence);
+        splitSentence(Sentence.ToLower());
 
         // Check if Sentence equals
         if(keywords.Length != round && sentencesUsed.Contains(Sentence)){
