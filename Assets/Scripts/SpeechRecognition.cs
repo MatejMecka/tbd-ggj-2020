@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class SpeechRecognition : MonoBehaviour
 {
-   private SentenceBehaviour sb;
-   public string[] keywords = new string[] { };
-   public ConfidenceLevel confidence = ConfidenceLevel.Medium;
+	private SentenceBehaviour sb;
+	public string[] keywords = new string[] { };
+	public ConfidenceLevel confidence = ConfidenceLevel.Medium;
 
     protected PhraseRecognizer recognizer;
     protected string word;
@@ -21,7 +21,7 @@ public class SpeechRecognition : MonoBehaviour
     private void Recognizer_OnPhraseRecognized(PhraseRecognizedEventArgs args)
     {
         word = args.text;
-        if(!string.IsNullOrEmpty() && word != previousWord){
+        if(string.IsNullOrEmpty() == false && word != previousWord){
             sb.validateWord(word, counter);
             previousWord = word;
             counter++;
