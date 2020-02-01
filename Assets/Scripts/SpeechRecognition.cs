@@ -37,6 +37,7 @@ public class SpeechRecognition : MonoBehaviour
             player.GetComponent<Player>().updatePlayerData(wrongTracker);
             
             wrongTracker = false;
+            counter = 0;
 
             // Generate New Sentence
             GetComponent<SentenceBehaviour>().getNewSentence(4);
