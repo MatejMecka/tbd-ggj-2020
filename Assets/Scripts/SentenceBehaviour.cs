@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,15 +11,19 @@ public class SentenceBehaviour : MonoBehaviour
     public string[] keywords = new string[] {};
     public List<string> keywordsShuffled = new List<string>();
     public Text sentence;
+    public string fileName;
+    private string[] lines = new string[]{};
+
+    //public StreamReader reader = new StreamReader(path);
 
     void Start()
     {
-        splitSentence(Sentence);
-        for(int i=0; i < keywords.Length; i++){
-            keywordsShuffled.Add(keywords[i]);
-        }
-        shuffleKeywords();
-        sentence.text = string.Join(" ", keywordsShuffled.ToArray());
+        var sr = new StreamReader(Application.dataPath + "/" + fileName);
+        var fileContents = sr.ReadToEnd();
+        sr.Close();
+
+        lines = fileContents.Split("\n"[0]);
+        getNewSentence();
     }   
 
     // Update is called once per frame
@@ -26,6 +31,20 @@ public class SentenceBehaviour : MonoBehaviour
     {
        // print("test");
     }
+
+    void getNewSentence(){
+        Sentence = lines[Random.Range(0, lines.Length)];
+        //print("RANDOM: " + lines[Random.Range(0, lines.Length)]);
+        splitSentence(Sentence);
+
+        for(int i=0; i < keywords.Length; i++){
+            keywordsShuffled.Add(keywords[i]);
+        }
+
+        shuffleKeywords();
+        sentence.text = string.Join(" ", keywordsShuffled.ToArray());
+    }
+
 
     void splitSentence(string sentence){
         // Create Array of Words for Speech Recognizer
@@ -54,5 +73,19 @@ public class SentenceBehaviour : MonoBehaviour
             shuffleKeywords();
         }
     }
+
+    void validateSentence(){
+        ;
+        /*
+            if(keywords.Length == guesses.Count &6 keywords == guesses.Count){
+                // Increase Scores
+                score++;
+                time = ""
+            }
+            getNewSentence();
+         */
+    }
+
+    
 
 }
