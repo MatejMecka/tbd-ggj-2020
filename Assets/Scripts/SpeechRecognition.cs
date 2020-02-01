@@ -31,7 +31,7 @@ public class SpeechRecognition : MonoBehaviour
 
 	private void Update()
 	{
-		//print(word);
+
 	}
 	
 	public void loadKeywords()
