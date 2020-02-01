@@ -33,6 +33,9 @@ public class HandlePlayers : MonoBehaviour
         currentPlayer = GameObject.Find("Player"  + currentPlayerId.ToString());
     }
 
+    public GameObject getCurrentPlayer(){
+        return GameObject.Find("Player"  + currentPlayerId.ToString());
+    }
 
     // Update is called once per frame
     void Update()
