@@ -12,6 +12,7 @@ public class SpeechRecognition : MonoBehaviour
     private string previousWord;
     private int counter=0;
     private int correctTracker = 0;
+    private bool wrongTracker = false;
 
 
     private void Start()
