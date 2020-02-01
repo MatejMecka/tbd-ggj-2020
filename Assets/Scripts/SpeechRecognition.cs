@@ -44,13 +44,13 @@ public class SpeechRecognition : MonoBehaviour
             counter++;
             if(!answer){
                 // Handle Here Wrong Sentence
-                print("You fucking Donkey!")
+                print("You fucking Donkey!");
                 wrongTracker=true;
-                generateNewRound(wrongTracker);
+                generateNewRound();
             }
         }
         if(counter == keywords.Length){
-            generateNewRound(wrongTracker);
+            generateNewRound();
         }
     }
 
