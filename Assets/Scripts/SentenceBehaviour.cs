@@ -2,22 +2,22 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class SentenceBehaviour : MonoBehaviour
 {
 	// Start is called before the first frame update
 	private SpeechRecognition srec;
+	private VisualsHandler vhand;
 	public string Sentence = "";
-    public string[] keywords = new string[] {};
+	public string[] keywords = new string[] {};
     public List<string> keywordsShuffled = new List<string>();
-    public Text sentence;
     public string fileName;
     private string[] lines = new string[]{};
     public Player player;
     private int level = 0;
     private int cycles = 0;
     private List<string> sentencesUsed = new List<string>();
+
 
     //public StreamReader reader = new StreamReader(path);
 
@@ -31,7 +31,12 @@ public class SentenceBehaviour : MonoBehaviour
 
 		srec = gameObject.GetComponent<SpeechRecognition>();
 		srec.loadKeywords();
-    }   
+
+		vhand = gameObject.GetComponent<VisualsHandler>();
+		vhand.loadKeywords();
+		vhand.addText();
+
+	}   
 
     // Update is called once per frame
     void Update(){
@@ -57,7 +62,7 @@ public class SentenceBehaviour : MonoBehaviour
         }
 
         shuffleKeywords();
-        sentence.text = string.Join(" ", keywordsShuffled.ToArray());
+		
     }
 
 
