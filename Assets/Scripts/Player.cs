@@ -8,8 +8,8 @@ public class Player : MonoBehaviour
     public int score;
     //public List<int> acccuracy;
     public float time=0;
-    public int corrects;
-    public int wrongs;
+    public int corrects=0;
+    public int wrongs=0;
     public bool guessesEnabled;
 
     void Start()
@@ -26,8 +26,11 @@ public class Player : MonoBehaviour
 
     }
 
-    public void updatePlayerData(int correctTracker, int wrongAnswers){
-        corrects += correctTracker;
-        wrongs += wrongAnswers;
+    public void updatePlayerData(bool correct){
+        if(correct){
+            corrects++;
+        } else {
+            wrongs++;
+        }
     }
 }

@@ -26,18 +26,19 @@ public class SpeechRecognition : MonoBehaviour
             bool answer = sb.validateWord(word, counter);
             previousWord = word;
             counter++;
-            if(answer){
-                correctTracker++;
+            if(!answer){
+                wrongTracker=true;
             }
         }
         if(counter == keywords.Length){
             // Set the Player Score
-            GetComponent<Player>().updatePlayerData(correctTracker, keywords.Length - correctTracker);
+            GameObject player = GetComponent<HandlePlayers>().getCurrentPlayer();
+            player.GetComponent<Player>().updatePlayerData(wrongTracker);
             
-            correctTracker = 0;
+            wrongTracker = false;
 
             // Generate New Sentence
-            GetComponent<SentenceBehaviour>().getNewSentence(2);
+            GetComponent<SentenceBehaviour>().getNewSentence(4);
 
             // Switch to the next player
             GetComponent<HandlePlayers>().switchPlayer();
