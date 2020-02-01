@@ -8,6 +8,7 @@ public class HandlePlayers : MonoBehaviour
     public int currentPlayerId = 0;
     public GameObject currentPlayer;
     private int numPlayers = 0;
+    public int round = 0;
 
     void Start()
     {
@@ -26,8 +27,15 @@ public class HandlePlayers : MonoBehaviour
 
     public void switchPlayer(){
         if(currentPlayerId > numPlayers){
-            currentPlayerId = 0;
-        } else{
+            // Todo: Replace 4 With Max Rounds!
+            if(round == 4){
+
+            }   else {
+                currentPlayerId = 0;
+                round++; 
+            }
+
+        }  else{
             currentPlayerId++;
         }
         currentPlayer = GameObject.Find("Player"  + currentPlayerId.ToString());
