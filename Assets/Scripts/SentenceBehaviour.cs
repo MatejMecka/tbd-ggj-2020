@@ -47,9 +47,7 @@ public class SentenceBehaviour : MonoBehaviour
             getNewSentence(round);
         }
 
-        for(int i=0; i < keywordsShuffled.Count; i++){
-             keywordsShuffled[i] = null;
-        }
+        keywordsShuffled.Clear();
 
         // Add Keywords
         for(int i=0; i < keywords.Length; i++){
@@ -93,6 +91,10 @@ public class SentenceBehaviour : MonoBehaviour
 	}
 
 	public bool validateWord(string word, int counter){
+		if (counter == keywords.Length - 1)
+		{
+			return true;
+		}
 		return keywords[counter] == word;
 	}
 

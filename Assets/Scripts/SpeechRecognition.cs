@@ -21,9 +21,10 @@ public class SpeechRecognition : MonoBehaviour
     private void Recognizer_OnPhraseRecognized(PhraseRecognizedEventArgs args)
     {
         word = args.text;
-        if(!string.IsNullOrEmpty(word) && word != previousWord){
-            sb.validateWord(word, counter);
-            previousWord = word;
+		print(word);
+		if (!string.IsNullOrEmpty(word) && word != previousWord){
+			print(sb.validateWord(word, counter));
+			previousWord = word;
             counter++;
         }
     }
@@ -39,7 +40,6 @@ public class SpeechRecognition : MonoBehaviour
 
 	private void Update()
 	{
-
 	}
 	
 	public void loadKeywords()
