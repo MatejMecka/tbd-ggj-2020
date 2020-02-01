@@ -14,29 +14,41 @@ public class SentenceBehaviour : MonoBehaviour
     public Text sentence;
     public string fileName;
     private string[] lines = new string[]{};
+    public Player player;
+    private int level = 0;
+    private int cycles = 0;
+    private List<int> sentencesUsed = new List<int>();
 
     //public StreamReader reader = new StreamReader(path);
 
-    void Start()
-    {
+    void Start(){
         var sr = new StreamReader(Application.dataPath + "/" + fileName);
         var fileContents = sr.ReadToEnd();
         sr.Close();
 
         lines = fileContents.Split("\n"[0]);
-        getNewSentence();
+        getNewSentence(level+3);
     }   
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update(){
        // print("test");
     }
 
-    void getNewSentence(){
+    void getNewSentence(int round){
         Sentence = lines[Random.Range(0, lines.Length)];
         splitSentence(Sentence);
 
+        // Check if Sentence equals
+        if(keywords.Length != round){
+            getNewSentence(round);
+        }
+
+        for(int i=0; i < keywordsShuffled.Count; i++){
+             keywordsShuffled[i] = null;
+        }
+
+        // Add Keywords
         for(int i=0; i < keywords.Length; i++){
             keywordsShuffled.Add(keywords[i]);
         }
@@ -57,7 +69,6 @@ public class SentenceBehaviour : MonoBehaviour
     }
 
     void shuffleKeywords(){
-
         // Shuffle Words to show to User
         for(int i=0; i < keywordsShuffled.Count; i++){
             int rnd = Random.Range(0, keywordsShuffled.Count);
@@ -67,23 +78,41 @@ public class SentenceBehaviour : MonoBehaviour
         }
         
         // Verify it is Randomized
+        for(int i=0; i < keywords.Length; i++){
+            if(keywords[i]==keywordsShuffled[i]){
+                shuffleKeywords();
+                break;
+            }
+        }
+
+        /* 
         if(keywords == keywordsShuffled.ToArray()){
             for(int i=0; i < keywordsShuffled.Count; i++){
                 keywordsShuffled[i] = null;
             }
             shuffleKeywords();
-        }
+        }*/
     }
 
     void validateSentence(){
         ;
         /*
+            GameObject player = HandlePlayers.currentPlayer
+            cycles++
             if(keywords.Length == guesses.Count &6 keywords == guesses.Count){
                 // Increase Scores
-                score++;
-                time = ""
+               // player.score++;
+                player.corrects++;
+            } else {
+                player.wrongs++;
             }
-            getNewSentence();
+            if(cycles == 5){
+                level++;
+                cycles = 0;
+            }
+            HandlePlayers.currentPlayerId++;
+            GameObject.currentPlayer = GameObject.Find("Player"  + currentPlayerId.ToString());
+            getNewSentence(level);
          */
     }
 
