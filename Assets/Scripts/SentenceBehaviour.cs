@@ -70,53 +70,31 @@ public class SentenceBehaviour : MonoBehaviour
         keywords = sentence.Split(' ');
     }
 
-    void shuffleKeywords(){
-        // Shuffle Words to show to User
-        for(int i=0; i < keywordsShuffled.Count; i++){
-            int rnd = Random.Range(0, keywordsShuffled.Count);
-            string temp = keywordsShuffled[i];
-            keywordsShuffled[i] = keywordsShuffled[rnd];
-            keywordsShuffled[rnd] = temp;
-        }
-        
-        // Verify it is Randomized
-        for(int i=0; i < keywords.Length; i++){
-            if(keywords[i]==keywordsShuffled[i]){
-                shuffleKeywords();
-                break;
-            }
-        }
+	void shuffleKeywords()
+	{
+		// Shuffle Words to show to User
+		for (int i = 0; i < keywordsShuffled.Count; i++)
+		{
+			int rnd = Random.Range(0, keywordsShuffled.Count);
+			string temp = keywordsShuffled[i];
+			keywordsShuffled[i] = keywordsShuffled[rnd];
+			keywordsShuffled[rnd] = temp;
+		}
 
-        /* 
-        if(keywords == keywordsShuffled.ToArray()){
-            for(int i=0; i < keywordsShuffled.Count; i++){
-                keywordsShuffled[i] = null;
-            }
-            shuffleKeywords();
-        }*/
-    }
+		// Verify it is Randomized
+		for (int i = 0; i < keywords.Length; i++)
+		{
+			if (keywords[i] == keywordsShuffled[i])
+			{
+				shuffleKeywords();
+				break;
+			}
+		}
+	}
 
-    void validateSentence(){
-        ;
-        /*
-            GameObject player = HandlePlayers.currentPlayer
-            cycles++
-            if(keywords.Length == guesses.Count &6 keywords == guesses.Count){
-                // Increase Scores
-               // player.score++;
-                player.corrects++;
-            } else {
-                player.wrongs++;
-            }
-            if(cycles == 5){
-                level++;
-                cycles = 0;
-            }
-            HandlePlayers.currentPlayerId++;
-            GameObject.currentPlayer = GameObject.Find("Player"  + currentPlayerId.ToString());
-            getNewSentence(level);
-         */
-    }
+	public bool validateWord(string word, int counter){
+		return keywords[counter] == word;
+	}
 
 
 }
