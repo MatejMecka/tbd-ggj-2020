@@ -31,4 +31,8 @@ public class RedirectToGame : MonoBehaviour
 
         SceneManager.LoadScene("game", LoadSceneMode.Single);
     }
+
+    public void quitGame(){
+        Application.Quit();
+    }
 }
