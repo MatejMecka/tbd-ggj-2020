@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -64,7 +63,6 @@ public class SentenceBehaviour : MonoBehaviour
         for(int i=0; i < keywords.Length; i++){
             keywords[i] = null;
         }
-		sentence = Regex.Replace(sentence, @"\s+", "");
         keywords = sentence.Split(' ');
     }
 
