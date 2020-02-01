@@ -1,14 +1,17 @@
-﻿using UnityEngine.Windows.Speech;
+using UnityEngine.Windows.Speech;
 using UnityEngine;
 
 public class SpeechRecognition : MonoBehaviour
 {
-	private SentenceBehaviour sb;
-	public string[] keywords = new string[] { };
-	public ConfidenceLevel confidence = ConfidenceLevel.Medium;
+   private SentenceBehaviour sb;
+   public string[] keywords = new string[] { };
+   public ConfidenceLevel confidence = ConfidenceLevel.Medium;
 
     protected PhraseRecognizer recognizer;
     protected string word;
+    private string previousWord;
+    private int counter=0;
+
 
     private void Start()
     {
@@ -18,6 +21,11 @@ public class SpeechRecognition : MonoBehaviour
     private void Recognizer_OnPhraseRecognized(PhraseRecognizedEventArgs args)
     {
         word = args.text;
+        if(!string.IsNullOrEmpty() && word != previousWord){
+            sb.validateWord(word, counter);
+            previousWord = word;
+            counter++;
+        }
     }
 
     private void OnApplicationQuit()
