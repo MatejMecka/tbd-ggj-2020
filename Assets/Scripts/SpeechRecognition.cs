@@ -21,7 +21,7 @@ public class SpeechRecognition : MonoBehaviour
     private void Recognizer_OnPhraseRecognized(PhraseRecognizedEventArgs args)
     {
         word = args.text;
-        if(string.IsNullOrEmpty() == false && word != previousWord){
+        if(!string.IsNullOrEmpty(word) && word != previousWord){
             sb.validateWord(word, counter);
             previousWord = word;
             counter++;
