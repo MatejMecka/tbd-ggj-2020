@@ -20,20 +20,8 @@ public class SpeechRecognition : MonoBehaviour
 		
 	}
 
-    private void Recognizer_OnPhraseRecognized(PhraseRecognizedEventArgs args)
-    {
-        word = args.text;
-        if(!string.IsNullOrEmpty(word) && word != previousWord){
-            bool answer = sb.validateWord(word, counter);
-			print(answer);
-            previousWord = word;
-            counter++;
-            if(!answer){
-                wrongTracker=true;
-            }
-        }
-        if(counter == keywords.Length){
-            // Set the Player Score
+    void generateNewRound(){
+        // Set the Player Score
             GameObject player = GetComponent<HandlePlayers>().getCurrentPlayer();
             player.GetComponent<Player>().updatePlayerData(wrongTracker);
             
@@ -45,7 +33,24 @@ public class SpeechRecognition : MonoBehaviour
 
             // Switch to the next player
             GetComponent<HandlePlayers>().switchPlayer();
+    }
 
+    private void Recognizer_OnPhraseRecognized(PhraseRecognizedEventArgs args)
+    {
+        word = args.text;
+        if(!string.IsNullOrEmpty(word) && word != previousWord){
+            bool answer = sb.validateWord(word, counter);
+            previousWord = word;
+            counter++;
+            if(!answer){
+                // Handle Here Wrong Sentence
+                print("You fucking Donkey!")
+                wrongTracker=true;
+                generateNewRound(wrongTracker);
+            }
+        }
+        if(counter == keywords.Length){
+            generateNewRound(wrongTracker);
         }
     }
 
