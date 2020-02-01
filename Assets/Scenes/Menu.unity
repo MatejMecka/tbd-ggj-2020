@@ -777,6 +777,7 @@ GameObject:
   - component: {fileID: 898245458}
   - component: {fileID: 898245457}
   - component: {fileID: 898245456}
+  - component: {fileID: 898245459}
   m_Layer: 5
   m_Name: Quit
   m_TagString: Untagged
@@ -847,8 +848,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1358884474}
-        m_MethodName: QuitGame
+      - m_Target: {fileID: 898245459}
+        m_MethodName: quitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -894,6 +895,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 898245454}
   m_CullTransparentMesh: 0
+--- !u!114 &898245459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 898245454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d439110c0090b420186c2959c4aaa1ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startButton: {fileID: 121768465}
+  input: {fileID: 1437907441}
+  numberOfPlayers: 0
 --- !u!1 &1177852330
 GameObject:
   m_ObjectHideFlags: 0

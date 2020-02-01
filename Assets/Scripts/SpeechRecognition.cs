@@ -17,7 +17,7 @@ public class SpeechRecognition : MonoBehaviour
 
     private void Start()
     {
-		
+        GetComponent<HandlePlayers>().orderPlayersByRank();
 	}
 
     void generateNewRound(){
