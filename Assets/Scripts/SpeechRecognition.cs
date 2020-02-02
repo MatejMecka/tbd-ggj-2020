@@ -40,6 +40,7 @@ public class SpeechRecognition : MonoBehaviour
         word = args.text;
         if(!string.IsNullOrEmpty(word) && word != previousWord){
             bool answer = sb.validateWord(word, counter);
+			print(answer);
             previousWord = word;
             counter++;
             if(!answer){
