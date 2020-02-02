@@ -43,6 +43,12 @@ public class VisualsHandler : MonoBehaviour
 		
 	}
 
-
+	public void clearText() {
+		GameObject[] words = GameObject.FindGameObjectsWithTag("word");
+		foreach(GameObject word in words)
+		{
+			GameObject.Destroy(word);
+		}
+	}
 	
 }

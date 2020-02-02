@@ -32,9 +32,7 @@ public class SentenceBehaviour : MonoBehaviour
 		srec = gameObject.GetComponent<SpeechRecognition>();
 		srec.loadKeywords();
 
-		vhand = gameObject.GetComponent<VisualsHandler>();
-		vhand.loadKeywords();
-		vhand.addText();
+		
 
 	}   
 
@@ -62,8 +60,14 @@ public class SentenceBehaviour : MonoBehaviour
         }
 
         shuffleKeywords();
-		
-    }
+
+		vhand = gameObject.GetComponent<VisualsHandler>();
+		vhand.clearText();
+		vhand.loadKeywords();
+		vhand.addText();
+
+
+	}
 
 
     void splitSentence(string sentence){
