@@ -34,7 +34,7 @@ public class HandlePlayers : MonoBehaviour
     }
 
     public void switchPlayer(){
-        if(currentPlayerId >= numPlayers){
+        if(currentPlayerId >= numPlayers-1){
             currentPlayerId = 0;
 			round++;
         } else{
