@@ -10,6 +10,7 @@ public class HandlePlayers : MonoBehaviour
     private int numPlayers = 0;
     public List<GameObject> playersPositions = new List<GameObject>();
     public List<GameObject> players = new List<GameObject>();
+	public int round = 0;
 
     void Start()
     {
@@ -31,6 +32,7 @@ public class HandlePlayers : MonoBehaviour
     public void switchPlayer(){
         if(currentPlayerId > numPlayers){
             currentPlayerId = 0;
+			round++;
         } else{
             currentPlayerId++;
         }

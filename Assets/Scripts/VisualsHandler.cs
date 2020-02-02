@@ -56,8 +56,11 @@ public class VisualsHandler : MonoBehaviour
 	{
 		for(int i = 0; i < words.Length; i++)
 		{
-			if(words[i].text == word)
+			if (words[i].text == word)
+			{
 				words[i].color = Color.green;
+				break;
+			}
 		}
 	}
 	

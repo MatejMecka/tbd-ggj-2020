@@ -23,15 +23,19 @@ public class SpeechRecognition : MonoBehaviour
 	}
 
     void generateNewRound(){
-        // Set the Player Score
-            GameObject player = GetComponent<HandlePlayers>().getCurrentPlayer();
+
+		HandlePlayers _round = GetComponent<HandlePlayers>();
+		int round = _round.round;
+
+		// Set the Player Score
+		GameObject player = GetComponent<HandlePlayers>().getCurrentPlayer();
             player.GetComponent<Player>().updatePlayerData(wrongTracker);
             
             wrongTracker = false;
             counter = 0;
 
             // Generate New Sentence
-            GetComponent<SentenceBehaviour>().getNewSentence(4);
+            GetComponent<SentenceBehaviour>().getNewSentence(round+3);
 
             // Switch to the next player
             GetComponent<HandlePlayers>().switchPlayer();
