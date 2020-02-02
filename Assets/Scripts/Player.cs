@@ -26,8 +26,8 @@ public class Player : MonoBehaviour
 
     }
 
-    public void updatePlayerData(bool correct){
-        if(correct){
+    public void updatePlayerData(bool wrong){
+        if(!wrong){
             corrects++;
         } else {
             wrongs++;

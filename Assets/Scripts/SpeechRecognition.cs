@@ -1,5 +1,6 @@
 using UnityEngine.Windows.Speech;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpeechRecognition : MonoBehaviour
 {
@@ -14,31 +15,38 @@ public class SpeechRecognition : MonoBehaviour
     private int counter=0;
     private int correctTracker = 0;
     private bool wrongTracker = false;
+	public Text roundText;
 
 
-    private void Start()
+	private void Start()
     {
         GetComponent<HandlePlayers>().orderPlayersByRank();
 		vh = gameObject.GetComponent<VisualsHandler>();
+
+		HandlePlayers hp = GetComponent<HandlePlayers>();
+		int round = hp.round;
+		int friendlyRound = round + 1;
+		roundText.text = "ROUND: " + friendlyRound.ToString();
 	}
 
     void generateNewRound(){
 
-		HandlePlayers _round = GetComponent<HandlePlayers>();
-		int round = _round.round;
+		HandlePlayers hp = GetComponent<HandlePlayers>();
+		int round = hp.round;
+		int friendlyRound = round + 1;
+		roundText.text = "ROUND: " + friendlyRound.ToString();
 
-		// Set the Player Score
+
 		GameObject player = GetComponent<HandlePlayers>().getCurrentPlayer();
-            player.GetComponent<Player>().updatePlayerData(wrongTracker);
-            
-            wrongTracker = false;
-            counter = 0;
+		//print("Player" + hp.currentPlayerId.ToString());
+		player.GetComponent<Player>().updatePlayerData(wrongTracker);
+        wrongTracker = false;
+        counter = 0;
 
-            // Generate New Sentence
-            GetComponent<SentenceBehaviour>().getNewSentence(round+3);
+        // Generate New Sentence
+        GetComponent<SentenceBehaviour>().getNewSentence(round+3);
+		GetComponent<HandlePlayers>().switchPlayer();
 
-            // Switch to the next player
-            GetComponent<HandlePlayers>().switchPlayer();
     }
 
     private void Recognizer_OnPhraseRecognized(PhraseRecognizedEventArgs args)

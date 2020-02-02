@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HandlePlayers : MonoBehaviour
 {
     // Start is called before the first frame update
     public int currentPlayerId = 0;
     public GameObject currentPlayer;
-    private int numPlayers = 0;
+	public Text playerText; 
+    public int numPlayers = 0;
     public List<GameObject> playersPositions = new List<GameObject>();
     public List<GameObject> players = new List<GameObject>();
 	public int round = 0;
@@ -25,25 +27,29 @@ public class HandlePlayers : MonoBehaviour
         }
 
         currentPlayer = GameObject.Find("Player"  + currentPlayerId.ToString());
-        playersPositions = players;
+		int playerFriendly = currentPlayerId + 1;
+		playerText.text = "Player " + playerFriendly.ToString() + " GO!";
+		playersPositions = players;
         orderPlayersByRank();
     }
 
     public void switchPlayer(){
-        if(currentPlayerId > numPlayers){
+        if(currentPlayerId >= numPlayers){
             currentPlayerId = 0;
 			round++;
         } else{
             currentPlayerId++;
         }
         currentPlayer = GameObject.Find("Player"  + currentPlayerId.ToString());
-    }
+		int playerFriendly = currentPlayerId + 1;
+		playerText.text = "Player " + playerFriendly.ToString() + " GO!";
+	}
 
     public GameObject getCurrentPlayer(){
-        return GameObject.Find("Player"  + currentPlayerId.ToString());
-    }
+		return currentPlayer;
+	}
 
-    public void orderPlayersByRank(){
+	public void orderPlayersByRank(){
         for(int i=0; i < playersPositions.Count; i++){
             // Get Player One's score
 
