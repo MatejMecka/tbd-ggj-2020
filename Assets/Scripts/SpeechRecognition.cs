@@ -1,6 +1,8 @@
 using UnityEngine.Windows.Speech;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class SpeechRecognition : MonoBehaviour
 {
@@ -20,6 +22,7 @@ public class SpeechRecognition : MonoBehaviour
 	public AudioSource audioDataOther;
 	public AudioClip otherClip;
     public AudioClip OriginalClip;
+	public int round = 0;
 
 	private void Start()
     {
@@ -27,7 +30,7 @@ public class SpeechRecognition : MonoBehaviour
 		vh = gameObject.GetComponent<VisualsHandler>();
 
 		HandlePlayers hp = GetComponent<HandlePlayers>();
-		int round = hp.round;
+		round = hp.round;
 		int friendlyRound = round + 1;
 		roundText.text = "ROUND: " + friendlyRound.ToString();
 
@@ -37,7 +40,7 @@ public class SpeechRecognition : MonoBehaviour
     void generateNewRound(){
 
 		HandlePlayers hp = GetComponent<HandlePlayers>();
-		int round = hp.round;
+		round = hp.round;
 		int friendlyRound = round + 1;
 		roundText.text = "ROUND: " + friendlyRound.ToString();
 
@@ -58,7 +61,27 @@ public class SpeechRecognition : MonoBehaviour
     {
         word = args.text;
         if(!string.IsNullOrEmpty(word) && word != previousWord){
-            bool answer = sb.validateWord(word, counter);
+			if (round == 3)
+			{
+				HandlePlayers hp = GetComponent<HandlePlayers>();
+				hp.orderPlayersByRank();
+				if (hp.playersPositions.ElementAtOrDefault(0) != null){
+					GameObject winner = hp.playersPositions[0];
+					PlayerPrefs.SetString("Winner", winner.name);
+				}
+				if (hp.playersPositions.ElementAtOrDefault(1) != null){
+					GameObject runnerup = hp.playersPositions[1];
+					PlayerPrefs.SetString("RunnerUp", runnerup.name);
+				}
+				if (hp.playersPositions.ElementAtOrDefault(2) != null){
+					GameObject finalist = hp.playersPositions[2];
+					PlayerPrefs.SetString("Finalist", finalist.name);
+				}
+
+				SceneManager.LoadScene("Score", LoadSceneMode.Single);
+			}
+
+			bool answer = sb.validateWord(word, counter);
 			print(answer);
             previousWord = word;
             counter++;
@@ -81,6 +104,7 @@ public class SpeechRecognition : MonoBehaviour
             generateNewRound();
 			loadKeywords();
         }
+
     }
 
     private void OnApplicationQuit()
