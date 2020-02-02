@@ -16,7 +16,9 @@ public class SpeechRecognition : MonoBehaviour
     private int correctTracker = 0;
     private bool wrongTracker = false;
 	public Text roundText;
-
+    public AudioSource audioData;
+    public AudioClip otherClip;
+    public AudioClip OriginalClip;
 
 	private void Start()
     {
@@ -27,6 +29,8 @@ public class SpeechRecognition : MonoBehaviour
 		int round = hp.round;
 		int friendlyRound = round + 1;
 		roundText.text = "ROUND: " + friendlyRound.ToString();
+
+        audioData = GetComponent<AudioSource>();
 	}
 
     void generateNewRound(){
@@ -63,10 +67,15 @@ public class SpeechRecognition : MonoBehaviour
                 wrongTracker=true;
                 generateNewRound();
 				loadKeywords();
+                audioData.clip = otherClip;
+                audioData.Play(0);
+                audioData.clip = OriginalClip;
+                
 			}
 			else
 			{
 				vh.colorWord(word);
+                audioData.Play(0);
 			}
         }
         if(counter == keywords.Length){
