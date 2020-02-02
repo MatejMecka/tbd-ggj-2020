@@ -17,7 +17,8 @@ public class SpeechRecognition : MonoBehaviour
     private bool wrongTracker = false;
 	public Text roundText;
     public AudioSource audioData;
-    public AudioClip otherClip;
+	public AudioSource audioDataOther;
+	public AudioClip otherClip;
     public AudioClip OriginalClip;
 
 	private void Start()
@@ -64,12 +65,10 @@ public class SpeechRecognition : MonoBehaviour
             if(!answer){
                 // Handle Here Wrong Sentence
                 print("You fucking Donkey!");
-                wrongTracker=true;
+				audioDataOther.Play(0);
+				wrongTracker =true;
                 generateNewRound();
 				loadKeywords();
-                audioData.clip = otherClip;
-                audioData.Play(0);
-                audioData.clip = OriginalClip;
                 
 			}
 			else
