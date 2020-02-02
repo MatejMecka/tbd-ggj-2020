@@ -4,6 +4,7 @@ using UnityEngine;
 public class SpeechRecognition : MonoBehaviour
 {
 	private SentenceBehaviour sb;
+	private VisualsHandler vh;
 	public string[] keywords = new string[] { };
 	public ConfidenceLevel confidence = ConfidenceLevel.Medium;
 
@@ -18,6 +19,7 @@ public class SpeechRecognition : MonoBehaviour
     private void Start()
     {
         GetComponent<HandlePlayers>().orderPlayersByRank();
+		vh = gameObject.GetComponent<VisualsHandler>();
 	}
 
     void generateNewRound(){
@@ -48,10 +50,16 @@ public class SpeechRecognition : MonoBehaviour
                 print("You fucking Donkey!");
                 wrongTracker=true;
                 generateNewRound();
-            }
+				loadKeywords();
+			}
+			else
+			{
+				vh.colorWord(word);
+			}
         }
         if(counter == keywords.Length){
             generateNewRound();
+			loadKeywords();
         }
     }
 

@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keywords: []
-  confidence: 1
+  confidence: 2
 --- !u!4 &363295259
 Transform:
   m_ObjectHideFlags: 0
@@ -264,6 +264,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentPlayerId: 0
   currentPlayer: {fileID: 0}
+  playersPositions: []
+  players: []
 --- !u!114 &363295261
 MonoBehaviour:
   m_ObjectHideFlags: 0

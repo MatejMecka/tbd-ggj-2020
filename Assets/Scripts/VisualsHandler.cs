@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
+
 public class VisualsHandler : MonoBehaviour
 {
 
@@ -48,6 +49,15 @@ public class VisualsHandler : MonoBehaviour
 		foreach(GameObject word in words)
 		{
 			GameObject.Destroy(word);
+		}
+	}
+
+	public void colorWord(string word)
+	{
+		for(int i = 0; i < words.Length; i++)
+		{
+			if(words[i].text == word)
+				words[i].color = Color.green;
 		}
 	}
 	
