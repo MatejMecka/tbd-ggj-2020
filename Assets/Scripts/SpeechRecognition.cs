@@ -20,6 +20,9 @@ public class SpeechRecognition : MonoBehaviour
 	public Text roundText;
     public AudioSource audioData;
 	public AudioSource audioDataOther;
+	public AudioSource round1;
+	public AudioSource round2;
+	public AudioSource round3;
 	public AudioClip otherClip;
     public AudioClip OriginalClip;
 	public int round = 0;
@@ -35,6 +38,7 @@ public class SpeechRecognition : MonoBehaviour
 		roundText.text = "ROUND: " + friendlyRound.ToString();
 
         audioData = GetComponent<AudioSource>();
+		round1.Play(0);
 	}
 
     void generateNewRound(){
@@ -61,6 +65,18 @@ public class SpeechRecognition : MonoBehaviour
     {
         word = args.text;
         if(!string.IsNullOrEmpty(word) && word != previousWord){
+			if (round == 1)
+			{
+				round2.Play(0);
+				round1.Stop();
+			}
+
+			if (round == 3)
+			{
+				round3.Play(0);
+				round2.Stop();
+			}
+
 			if (round == 3)
 			{
 				HandlePlayers hp = GetComponent<HandlePlayers>();
@@ -87,7 +103,7 @@ public class SpeechRecognition : MonoBehaviour
             counter++;
             if(!answer){
                 // Handle Here Wrong Sentence
-                print("You fucking Donkey!");
+                //print("You fucking Donkey!");
 				audioDataOther.Play(0);
 				wrongTracker =true;
                 generateNewRound();
