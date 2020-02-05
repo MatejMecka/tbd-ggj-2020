@@ -16,7 +16,7 @@ Your Voice
 # How to Contribute
 
 # Disclamer!
-We build this game in less than 48hours without sleeping during Global Game Jam 2019.
+We build this game in less than 48hours without sleeping during Global Game Jam 2020.
 
 **We are seriously not responsible for any of the consequence caused to the reading of this code.**
 
