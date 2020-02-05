@@ -22,7 +22,7 @@ public class SentenceBehaviour : MonoBehaviour
     //public StreamReader reader = new StreamReader(path);
 
     void Start(){
-        var sr = new StreamReader(Application.dataPath + "/" + fileName);
+        var sr = new StreamReader(Path.Combine(Application.streamingAssetsPath, fileName));
         var fileContents = sr.ReadToEnd();
         sr.Close();
 
